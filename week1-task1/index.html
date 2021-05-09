@@ -12,15 +12,17 @@
 
     <main>
       <form>
-        <input type="radio" name="timezone" value="1️⃣">Eastern Standard Time<br>
-        <input type="radio" name="timezone" value="2️⃣">Central Standard Time<br>
-        <input type="radio" name="timezone" value="3️⃣">Mountain Standard Time<br>
-        <input type="radio" name="timezone" value="4️⃣">Pacific Standard Time<br>
-        <input type="radio" name="timezone" value="5️⃣">Alaska Standard Time<br>
-        <input type="radio" name="timezone" value="6️⃣">Hawaii-Aleutian Standard Time<br>
+        <input type="radio" name="timezone" value="est">Eastern Standard Time<br>
+        <input type="radio" name="timezone" value="cst">Central Standard Time<br>
+        <input type="radio" name="timezone" value="mst">Mountain Standard Time<br>
+        <input type="radio" name="timezone" value="pst">Pacific Standard Time<br>
+        <input type="radio" name="timezone" value="ast">Alaska Standard Time<br>
+        <input type="radio" name="timezone" value="hst">Hawaii-Aleutian Standard Time<br>
         <button type="button" value="Submit" onclick="readform()">submit</button>
       </form>
       <script type="text/javascript">
+        let offset = 0;
+
         function readform() {
           let radioButton = document.getElementsByName("timezone");
           let output = radioButton[0].value;
@@ -30,11 +32,31 @@
             }
             document.getElementById("print").innerHTML = output;
           }
+          switch (timezone) {
+            case "pst":
+              offset = 2;
+              break;
+            case "ast":
+              offset = 3;
+              break;
+            case "hst":
+              offset = 1;
+              break;
+            case "mst":
+              offset = 4;
+              break;
+            case "cst":
+              offset = 5;
+              break;
+            default:
+              offset = 0;
+          }
+          setTime();
         }
 
         function setTime() {
           let day = new Date();
-          let hour = day.getHours();
+          let hour = day.getHours() + offset;
           let minute = day.getMinutes();
           let second = day.getSeconds();
           let time = hour + ':' + minute + ':' + second;
