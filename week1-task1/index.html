@@ -18,8 +18,20 @@
         <input type="radio" name="timezone" value="4️⃣">Pacific Standard Time<br>
         <input type="radio" name="timezone" value="5️⃣">Alaska Standard Time<br>
         <input type="radio" name="timezone" value="6️⃣">Hawaii-Aleutian Standard Time<br>
-        <button type="button" value="Submit">submit</button>
+        <button type="button" value="Submit" onclick="readform()">submit</button>
       </form>
+      <script type="text/javascript">
+        function readform() {
+          var radioButton = document.getElementsByName("timezone");
+          var output = radioButton[0].value;
+          for (i = 0; i < radioButton.length; i++) {
+            if (radioButton[i].checked == true) {
+              output = radioButton[i].value;
+            }
+            document.getElementById("print").innerHTML = output;
+          }
+        }
+      </script>
       <div id="print">
 
       </div>
